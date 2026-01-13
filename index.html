@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Arkam! 🎉</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Birthday Header -->
+        <div class="header">
+            <div class="cake-icon">🎂</div>
+            <h1 class="title">Happy Birthday</h1>
+            <h2 class="name">Arkam!</h2>
+            <div class="emojis">🎈🎉✨🎁🎊</div>
+        </div>
+
+        <!-- Slideshow Container -->
+        <div class="slideshow-container">
+            <div class="slideshow-wrapper">
+                <div class="slide active">
+                    <img src="images/photo1.jpg" alt="Arkam Photo 1">
+                    <div class="slide-overlay"></div>
+                </div>
+                <div class="slide">
+                    <img src="images/photo2.jpg" alt="Arkam Photo 2">
+                    <div class="slide-overlay"></div>
+                </div>
+                <div class="slide">
+                    <img src="images/photo3.jpg" alt="Arkam Photo 3">
+                    <div class="slide-overlay"></div>
+                </div>
+                <div class="slide">
+                    <img src="images/photo4.jpg" alt="Arkam Photo 4">
+                    <div class="slide-overlay"></div>
+                </div>
+                <div class="slide">
+                    <img src="images/photo5.jpg" alt="Arkam Photo 5">
+                    <div class="slide-overlay"></div>
+                </div>
+                <div class="slide">
+                    <img src="images/photo6.jpg" alt="Arkam Photo 6">
+                    <div class="slide-overlay"></div>
+                </div>
+            </div>
+            
+            <!-- Slide Counter -->
+            <div class="slide-counter">
+                <span id="current-slide">1</span> / <span id="total-slides">6</span>
+            </div>
+        </div>
+
+        <!-- Birthday Message -->
+        <div class="message-card">
+            <div class="heart-icon">💝</div>
+            <p class="message">
+                On this special day, we celebrate you, little Arkam! May your journey be filled with wonder, 
+                happiness, and countless beautiful memories. You bring so much joy to everyone around you!
+            </p>
+            <div class="message-emojis">🌟💫🎈🎂🎁🎉✨</div>
+        </div>
+
+        <!-- Music Player (Hidden but auto-playing) -->
+        <audio id="birthday-music" autoplay loop preload="auto">
+            <source src="music/birthday-song.mp3" type="audio/mpeg">
+            <source src="music/birthday-song.wav" type="audio/wav">
+            <source src="music/birthday-song.ogg" type="audio/ogg">
+        </audio>
+
+        <!-- Music Control Button -->
+        <button class="music-toggle" id="music-toggle" aria-label="Toggle music">
+            <span class="music-icon">🎵</span>
+        </button>
+    </div>
+
+    <!-- Background Decorations -->
+    <div class="background-decorations">
+        <div class="sparkle sparkle-1">✨</div>
+        <div class="sparkle sparkle-2">⭐</div>
+        <div class="sparkle sparkle-3">✨</div>
+        <div class="sparkle sparkle-4">⭐</div>
+        <div class="sparkle sparkle-5">✨</div>
+        <div class="sparkle sparkle-6">⭐</div>
+        <div class="sparkle sparkle-7">✨</div>
+        <div class="sparkle sparkle-8">⭐</div>
+        <div class="sparkle sparkle-9">🎈</div>
+        <div class="sparkle sparkle-10">🎉</div>
+        <div class="sparkle sparkle-11">🎊</div>
+        <div class="sparkle sparkle-12">💫</div>
+    </div>
+
+    <!-- Confetti Effect -->
+    <div class="confetti-container">
+        <div class="confetti confetti-1"></div>
+        <div class="confetti confetti-2"></div>
+        <div class="confetti confetti-3"></div>
+        <div class="confetti confetti-4"></div>
+        <div class="confetti confetti-5"></div>
+        <div class="confetti confetti-6"></div>
+        <div class="confetti confetti-7"></div>
+        <div class="confetti confetti-8"></div>
+        <div class="confetti confetti-9"></div>
+        <div class="confetti confetti-10"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
