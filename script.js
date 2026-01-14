@@ -11,19 +11,28 @@ const musicToggle = document.getElementById('music-toggle');
 let isMuted = false;
 let musicStarted = false;
 
-// Start overlay
-const startOverlay = document.getElementById('start-overlay');
-const startButton = document.getElementById('start-button');
-
-// Initialize
-totalSlidesElement.textContent = totalSlides;
+// Initialize slideshow
+function initSlideshow() {
+    // Set total slides count
+    totalSlidesElement.textContent = totalSlides;
+    
+    // Start slideshow immediately - show first slide
+    if (slides.length > 0) {
+        slides[0].classList.add('active');
+        currentSlideElement.textContent = 1;
+    }
+    
+    console.log(`Slideshow initialized with ${totalSlides} slides`);
+}
 
 // Auto-advance slideshow
 function nextSlide() {
+    if (slides.length === 0) return;
+    
     // Remove active class from current slide
     slides[currentSlide].classList.remove('active');
     
-    // Move to next slide
+    // Move to next slide (cycle back to 0 after last slide)
     currentSlide = (currentSlide + 1) % totalSlides;
     
     // Add active class to new slide
@@ -31,6 +40,15 @@ function nextSlide() {
     
     // Update counter
     currentSlideElement.textContent = currentSlide + 1;
+    
+    console.log(`Showing slide ${currentSlide + 1} of ${totalSlides}`);
+}
+
+// Initialize slideshow when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initSlideshow);
+} else {
+    initSlideshow();
 }
 
 // Start slideshow (change slide every 4 seconds)
@@ -152,54 +170,34 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
-// Start function - called when user clicks start button
-function startCelebration() {
-    // Hide overlay
-    startOverlay.classList.add('hidden');
-    
-    // Start music immediately (user interaction allows this)
-    audio.volume = 0.6;
-    audio.play().then(() => {
-        musicStarted = true;
-        musicToggle.innerHTML = '<span class="music-icon">🎵</span>';
-        musicToggle.classList.remove('muted');
-        console.log('Music started!');
-    }).catch(error => {
-        console.log('Could not play music:', error);
-        // Show play button if music fails
-        musicToggle.innerHTML = '<span class="music-icon">▶️</span>';
-        musicToggle.style.animation = 'pulse 2s ease-in-out infinite';
-    });
-    
-    // Start slideshow
-    if (slides.length > 0) {
-        slides[0].classList.add('active');
-    }
-}
-
-// Start button click
-if (startButton) {
-    startButton.addEventListener('click', startCelebration);
-}
-
-// Also start on any click/touch on overlay
-if (startOverlay) {
-    startOverlay.addEventListener('click', (e) => {
-        if (e.target === startOverlay || e.target.closest('.start-content')) {
-            startCelebration();
-        }
-    });
-    
-    // Start on touch for mobile
-    startOverlay.addEventListener('touchstart', startCelebration, { once: true });
-}
-
-// Initialize music autoplay (as backup)
-setupMusicAutoplay();
-
-// Smooth transitions
+// Initialize everything on page load
 document.addEventListener('DOMContentLoaded', () => {
-    // Don't show first slide until start is clicked
-    // slides will be shown when startCelebration() is called
+    // Initialize slideshow
+    initSlideshow();
+    
+    // Try to start music immediately
+    audio.volume = 0.6;
+    tryPlayMusic();
 });
+
+// Also try to start music when page is fully loaded
+window.addEventListener('load', () => {
+    tryPlayMusic();
+});
+
+// Try to start music on any user interaction (as fallback)
+let firstInteraction = true;
+document.addEventListener('click', () => {
+    if (firstInteraction && !musicStarted && !isMuted) {
+        tryPlayMusic();
+        firstInteraction = false;
+    }
+}, { once: true });
+
+document.addEventListener('touchstart', () => {
+    if (firstInteraction && !musicStarted && !isMuted) {
+        tryPlayMusic();
+        firstInteraction = false;
+    }
+}, { once: true });
 
