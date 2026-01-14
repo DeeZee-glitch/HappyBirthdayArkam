@@ -95,6 +95,7 @@ body {
     z-index: -1;
     background: linear-gradient(45deg, #ff006e, #ffbe0b, #06ffa5, #3a86ff);
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: blur(15px);
     opacity: 0.7;
@@ -618,8 +619,181 @@ body {
     }
 }
 
+/* Start Overlay */
+.start-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, 
+        #ff006e 0%, 
+        #8338ec 15%, 
+        #3a86ff 30%, 
+        #06ffa5 45%, 
+        #ffbe0b 60%, 
+        #fb5607 75%, 
+        #ff006e 90%, 
+        #8338ec 100%);
+    background-size: 400% 400%;
+    animation: gradientShift 12s ease infinite;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.start-overlay.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.start-content {
+    text-align: center;
+    padding: 40px;
+    animation: fadeInScale 1s ease-out;
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.start-cake {
+    font-size: 120px;
+    animation: bounce 2s ease-in-out infinite;
+    margin-bottom: 30px;
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.8));
+}
+
+.start-title {
+    font-family: 'Fredoka One', cursive;
+    font-size: 4rem;
+    color: white;
+    margin-bottom: 15px;
+    text-shadow: 
+        0 0 20px rgba(255, 255, 255, 0.8),
+        0 0 40px rgba(255, 0, 110, 0.6);
+    animation: textPulse 2s ease-in-out infinite;
+}
+
+@keyframes textPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.start-name {
+    font-family: 'Fredoka One', cursive;
+    font-size: 5rem;
+    color: white;
+    margin-bottom: 40px;
+    text-shadow: 
+        0 0 20px rgba(255, 255, 255, 1),
+        0 0 40px rgba(255, 190, 11, 0.8),
+        0 0 60px rgba(6, 255, 165, 0.6);
+    animation: nameGlow 3s ease-in-out infinite;
+}
+
+.start-button {
+    background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.95), 
+        rgba(255, 255, 255, 0.85));
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50px;
+    padding: 20px 50px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: 'Poppins', sans-serif;
+    color: #ff006e;
+    cursor: pointer;
+    box-shadow: 
+        0 10px 40px rgba(0, 0, 0, 0.3),
+        0 0 30px rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+    animation: buttonPulse 2s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+    0%, 100% { 
+        transform: scale(1);
+        box-shadow: 
+            0 10px 40px rgba(0, 0, 0, 0.3),
+            0 0 30px rgba(255, 255, 255, 0.5);
+    }
+    50% { 
+        transform: scale(1.05);
+        box-shadow: 
+            0 15px 50px rgba(0, 0, 0, 0.4),
+            0 0 40px rgba(255, 255, 255, 0.7),
+            0 0 60px rgba(255, 0, 110, 0.5);
+    }
+}
+
+.start-button:hover {
+    transform: scale(1.1);
+    box-shadow: 
+        0 15px 50px rgba(0, 0, 0, 0.4),
+        0 0 50px rgba(255, 255, 255, 0.8);
+}
+
+.start-button:active {
+    transform: scale(0.95);
+}
+
+.start-arrow {
+    font-size: 1.8rem;
+    animation: arrowBounce 1s ease-in-out infinite;
+}
+
+@keyframes arrowBounce {
+    0%, 100% { transform: translateX(0); }
+    50% { transform: translateX(10px); }
+}
+
+.start-hint {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1.1rem;
+    margin-top: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    animation: fadeInOut 2s ease-in-out infinite;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.7; }
+    50% { opacity: 1; }
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
+    .start-cake {
+        font-size: 80px;
+    }
+    
+    .start-title {
+        font-size: 2.5rem;
+    }
+    
+    .start-name {
+        font-size: 3.5rem;
+    }
+    
+    .start-button {
+        font-size: 1.2rem;
+        padding: 18px 40px;
+    }
+    
     .title {
         font-size: 3rem;
     }

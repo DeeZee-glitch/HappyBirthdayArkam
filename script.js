@@ -11,6 +11,10 @@ const musicToggle = document.getElementById('music-toggle');
 let isMuted = false;
 let musicStarted = false;
 
+// Start overlay
+const startOverlay = document.getElementById('start-overlay');
+const startButton = document.getElementById('start-button');
+
 // Initialize
 totalSlidesElement.textContent = totalSlides;
 
@@ -148,14 +152,54 @@ document.addEventListener('visibilitychange', () => {
     }
 });
 
-// Initialize music autoplay
+// Start function - called when user clicks start button
+function startCelebration() {
+    // Hide overlay
+    startOverlay.classList.add('hidden');
+    
+    // Start music immediately (user interaction allows this)
+    audio.volume = 0.6;
+    audio.play().then(() => {
+        musicStarted = true;
+        musicToggle.innerHTML = '<span class="music-icon">🎵</span>';
+        musicToggle.classList.remove('muted');
+        console.log('Music started!');
+    }).catch(error => {
+        console.log('Could not play music:', error);
+        // Show play button if music fails
+        musicToggle.innerHTML = '<span class="music-icon">▶️</span>';
+        musicToggle.style.animation = 'pulse 2s ease-in-out infinite';
+    });
+    
+    // Start slideshow
+    if (slides.length > 0) {
+        slides[0].classList.add('active');
+    }
+}
+
+// Start button click
+if (startButton) {
+    startButton.addEventListener('click', startCelebration);
+}
+
+// Also start on any click/touch on overlay
+if (startOverlay) {
+    startOverlay.addEventListener('click', (e) => {
+        if (e.target === startOverlay || e.target.closest('.start-content')) {
+            startCelebration();
+        }
+    });
+    
+    // Start on touch for mobile
+    startOverlay.addEventListener('touchstart', startCelebration, { once: true });
+}
+
+// Initialize music autoplay (as backup)
 setupMusicAutoplay();
 
 // Smooth transitions
 document.addEventListener('DOMContentLoaded', () => {
-    // Ensure first slide is visible
-    if (slides.length > 0) {
-        slides[0].classList.add('active');
-    }
+    // Don't show first slide until start is clicked
+    // slides will be shown when startCelebration() is called
 });
 
